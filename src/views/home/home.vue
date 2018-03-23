@@ -87,7 +87,7 @@ export default {
       })
     },
     loginOut () {
-      this.$confirm(`确认退出?`, '提醒', {
+      this.$confirm(`确定退出?`, '提醒', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(() => {

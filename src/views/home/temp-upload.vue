@@ -4,7 +4,7 @@
     <div style="padding:56px 95px;width: 600px;">
       <el-row style='margin-bottom:60px'>
         <el-col :span='8'>
-          <el-input v-model='name' size='small' placeholder='此处输入音频名称' style='margin: 23px 0;'></el-input>
+          <el-input :maxlength='20' v-model='name' size='small' placeholder='此处输入音频名称' style='margin: 23px 0;'></el-input>
           <el-select v-model='type' size='small' placeholder="选择音频类别" style='width:100%'>
             <el-option v-for='(i,n) in types' :key='n' :label="i.name" :value='i.id'></el-option>
           </el-select>
@@ -21,7 +21,7 @@
             <el-button class='size122-btn' type='warning' size='mini'>选择缩略图</el-button>
             <div slot="tip">
               图片格式：jpg或png<br/>
-               图片大小：1MB以内<br/>
+               图片大小：2MB以内<br/>
                 图片尺寸：建议428*428
             </div>
           </el-upload>
@@ -78,13 +78,13 @@ export default {
     onPicChange (file) {
       const isJPG = file.raw.type.indexOf('jpeg') !== -1
       const isPNG = file.raw.type.indexOf('png') !== -1
-      const isLt2M = file.size / 1024 / 1024 < 1
+      const isLt2M = file.size / 1024 / 1024 < 2
       if (!isJPG && !isPNG) {
         this.$message.error('图片只能是 JPG/PNG 格式!')
         return
       }
       if (!isLt2M) {
-        this.$message.error('图片大小不能超过 1MB!')
+        this.$message.error('图片大小不能超过 2MB!')
         return
       }
       this.imgUrl = file.url

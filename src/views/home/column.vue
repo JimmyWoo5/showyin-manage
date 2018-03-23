@@ -14,7 +14,7 @@
           <div class='column-title'>栏目{{n+1}}</div>
         </div>
         <div class="td height2">
-          <el-input size='small' placeholder='输入栏目名称' v-model='i.name'></el-input>
+          <el-input :maxlength='20' size='small' placeholder='输入栏目名称' v-model='i.name'></el-input>
         </div>
         <div class="td height3">
           <div class="column-img logo-img" :style="'width:' + (n !== 0 ? '76px' : 'auto') + ';background-image:url(' + i.themeLogo + ')' "></div>

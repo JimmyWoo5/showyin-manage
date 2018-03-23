@@ -17,7 +17,7 @@
               图片尺寸：建议1080*1200
           </div>
         </el-upload>
-        <el-input size='small' placeholder='此处输入图片名称' v-model.trim='name'></el-input>
+        <el-input :maxlength='20' size='small' placeholder='此处输入图片名称' v-model.trim='name'></el-input>
         <el-select size='small' placeholder="选择图片类别" v-model='type' style='margin: 10px 0 26px;width: 100%;'>
           <el-option v-for='(i,n) in types' :key='n' :label="i.name" :value='i.id'></el-option>
         </el-select>

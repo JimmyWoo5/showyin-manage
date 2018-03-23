@@ -5,7 +5,7 @@
 
       <el-col v-for='(i,n) in list' :key='n' :span='8' class='column-wrapper'>
         <div class='column-content'>
-          <div class='column-title'>栏目1</div>
+          <div class='column-title'>栏目{{n+1}}</div>
           <div class="column-img" :style="'background-image:url(' + i.bannerUrl + ')' "></div>
           <el-upload
             accept='image/*'

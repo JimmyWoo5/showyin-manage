@@ -14,13 +14,13 @@
                   label='名称'
                   :prop='i2.name'>
                   <el-input v-show='i2.isSave' size='mini' v-model.trim='i2.title'></el-input>
-                  <span v-show='!i2.isSave' style="margin-left: 15px;">{{i2.title}}</span>
+                  <div class='ellipse' v-show='!i2.isSave'><span style="margin-left: 15px;">{{i2.title}}</span></div>
                 </el-form-item>
                 <el-form-item label='类别'>
                   <el-select v-show='i2.isSave' size='mini' placeholder="请选择类别" v-model='i2.themeId'>
                     <el-option v-for='(i,n) in types' :key='n' :label="i.name" :value='i.id'></el-option>
                   </el-select>
-                  <span v-show='!i2.isSave' style="margin-left: 15px;">{{i2.typeName}}</span>
+                  <div class='ellipse' v-show='!i2.isSave'><span style="margin-left: 15px;">{{i2.typeName}}</span></div>
                 </el-form-item>
                 <el-button type='warning' size='mini' @click='onEditClick(i2)'>{{i2.isSave ? '保存' : '编辑'}}</el-button>
                 <el-button @click='del(i2)' style='float: right;' type='warning' size='mini'>删除</el-button>
@@ -45,31 +45,7 @@ export default {
       loading: false,
       types: [],
       filePath: filePath,
-      list: [
-        {
-          columnName: '愚人节',
-          items: [
-            {name: '名称一', type: 1, id: 1, isSave: 0},
-            {name: '名称二', type: 1, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 1, id: 1, isSave: 0}
-          ]
-        },
-        {
-          columnName: '愚人节2',
-          items: [
-            {name: '名称一', type: 1, id: 1, isSave: 0},
-            {name: '名称二', type: 1, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 2, id: 1, isSave: 0},
-            {name: '名称三', type: 1, id: 1, isSave: 0}
-          ]
-        }
-      ]
+      list: []
     }
   },
   methods: {
@@ -125,7 +101,7 @@ export default {
       i.isSave = true
     },
     del (i) {
-      this.$confirm(`是否删除${i.title}`, '提醒', {
+      this.$confirm(`确定删除${i.title}`, '提醒', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(() => {

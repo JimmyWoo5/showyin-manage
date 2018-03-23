@@ -3,7 +3,8 @@ import ELEMENT from 'element-ui'
 import store from '@/store'
 import router from '@/router'
 
-axios.defaults.baseURL = '/api'
+console.log(process.env)
+if (process.env.ENV === 'd') axios.defaults.baseURL = '/api'
 
 axios.interceptors.request.use(config => {
   if (store.state.token) config.headers['token'] = store.state.token
@@ -20,7 +21,7 @@ var $ajax = (opts) => {
   axios(opts).then(({data}) => {
     if (data.code === 0) {
       opts.done(data.data)
-    } else if (data.code === 10003) {
+    } else if (data.code === 10003 || data.code === 20001) {
       if (!store.state.isWarned) {
         ELEMENT.Message.error('请重新登录')
       }

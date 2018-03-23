@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>播放 copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="播放-copy">
+            <path d="M9,0 C4.03758,0 0,4.03758 0,9 C0,13.96242 4.03758,18 9,18 C13.96242,18 18,13.96242 18,9 C18,4.03758 13.96242,0 9,0 Z M9,16.99992 C4.58892,16.99992 1.00008,13.41108 1.00008,9 C1.00008,4.58892 4.58892,1.00008 9,1.00008 C13.41108,1.00008 16.99992,4.58892 16.99992,9 C16.99992,13.41108 13.41108,16.99992 9,16.99992 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            <g id="Group" transform="translate(7.000000, 6.000000)" stroke="#000000" stroke-linecap="round">
+                <path d="M1,0 L1,6" id="Line"></path>
+                <path d="M4,0 L4,6" id="Line-Copy"></path>
+            </g>
+        </g>
+    </g>
+</svg>

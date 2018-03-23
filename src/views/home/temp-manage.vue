@@ -4,11 +4,10 @@
     <el-row v-loading='loading'>
       <el-col :span='6' style='padding: 20px 20px 10px;'>
         <div class="editor-title">编辑说明文字</div>
-        <vue-editor
-          placeholder='...'
+        <quill-editor
           v-model='data.tempText'
-          :editor-toolbar='customToolbar'>
-        </vue-editor>
+          :options='option'>
+        </quill-editor>
         <div style="text-align: center;margin-top: 10px;">
           <el-button :loading='confirmLoading' @click='confirm' class='size110-btn' type='warning' size='mini'>确定</el-button>
         </div>
@@ -34,7 +33,7 @@
                     尺寸：377*377
                 </div>
               </el-upload>
-              <el-input size='small' placeholder='输入音频样例名称' v-model='i.title' style='margin:10px 0 8px;'></el-input>
+              <el-input :maxlength='20' size='small' placeholder='输入音频样例名称' v-model='i.title' style='margin:10px 0 8px;'></el-input>
               <el-select v-model='i.themeId' size='small' placeholder="选择音频类别" style='width:100%'>
                 <el-option v-for='(i,n) in types' :key='n' :label="i.name" :value='i.id'></el-option>
               </el-select>
@@ -49,6 +48,7 @@
                 <el-button class='size93-btn' type='warning' size='mini'>选择样例音频</el-button>
               </el-upload>
               <el-input
+                :maxlength='130'
                 type="textarea"
                 resize='none'
                 :rows="7"
@@ -70,17 +70,22 @@
 </template>
 
 <script>
-import {VueEditor} from 'vue2-editor'
+import {quillEditor} from 'vue-quill-editor'
 import {filePath} from '@/utils/constants'
+console.log(quillEditor)
 export default {
-  components: {VueEditor},
+  components: {quillEditor},
   data () {
     return {
       loading: false,
       confirmLoading: false,
       data: {},
       types: [],
-      customToolbar: []
+      option: {
+        modules: {
+          toolbar: []
+        }
+      }
     }
   },
   methods: {
@@ -200,8 +205,8 @@ export default {
     }
     .editor-title{background: @dark2;height: 30px;line-height: 30px;font-size: 12px;color: #FFFFFF;padding-left: 12px;}
     /*富文本样式重置*/
-    #quill-container{border-color: @dark2;}
-    .ql-toolbar.ql-snow{height: 0;padding: 0;border:none;}
-    .ql-editor{height: 470px;font-size: 12px}
+    .ql-container{}
+    .ql-editor{height: 470px;box-sizing: border-box;outline: none;overflow: auto;font-size: 12px;border:1px solid @dark2;padding:12px 8px;}
+    .ql-clipboard,.ql-tooltip{display: none;}
   }
 </style>

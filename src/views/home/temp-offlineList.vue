@@ -11,7 +11,7 @@
             <div class='song-logo' :style="'background-image:url(' + filePath + i2.voiceLogo + ')' "></div>
             <div>{{i2.voiceName}}</div>
           </el-col>
-          <el-col :span='1' :offset='1'><img @click='handlePlay(i2)' class='ctrl-btn' :src="'static/img/' + (i2.isPlay? 'play' : 'pause') + '.png'" /></el-col>
+          <el-col :span='1' :offset='1'><img @click='play(i2)' class='ctrl-btn' :src="'static/img/' + (i2.isPlay? 'play' : 'pause') + '.svg'" /></el-col>
           <el-col :span='1' :offset='1'><el-button :disabled='n2===0' type='text' @click='move(i2,1)'>上移</el-button></el-col>
           <el-col :span='1' :offset='1'><el-button :disabled='n2===i.voiceList.length-1' type='text' @click='move(i2,-1)'>下移</el-button></el-col>
           <el-col :span='1' :offset='1'><el-button type='text' @click='move(i2,0)'>置顶</el-button></el-col>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
 import {filePath} from '@/utils/constants'
 export default {
   data () {
@@ -38,6 +39,7 @@ export default {
   },
   methods: {
     getList () {
+      this.$refs.player.pause()
       this.loading = true
       this.$ajax({
         url: '/server/voice/list',
@@ -55,7 +57,7 @@ export default {
         }
       })
     },
-    handlePlay (i) {
+    play (i) {
       if (this.nowItem.id !== i.id) {
         this.nowItem.isPlay = false
       }
@@ -65,10 +67,10 @@ export default {
       i.isPlay = !i.isPlay
 
       if (i.isPlay) {
-        this.loading = true
+        NProgress.start()
         this.$refs.player.src = filePath + i.backMusicPath
         this.$refs.player.onloadedmetadata = () => {
-          this.loading = false
+          NProgress.done()
           this.$refs.player.play()
         }
       } else {
@@ -108,7 +110,7 @@ export default {
       })
     },
     del (i) {
-      this.$confirm(`是否删除${i.voiceName}`, '提醒', {
+      this.$confirm(`确定删除${i.voiceName}`, '提醒', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(() => {
@@ -137,6 +139,7 @@ export default {
   #temp-offline{
 
     .templist-wrapper{
+      border-bottom:1px solid #ffffff;
       .templist-title{line-height: 50px;padding-left: 12px;background: @dark2;color: #ffffff;}
       .el-row{border-bottom:1px solid @gray;height: 58px;line-height: 58px;}
       .col-left{
@@ -146,7 +149,6 @@ export default {
         .song-logo{margin: 8px 10px 0;width: 42px;height: 42px;background: no-repeat center;background-size: cover;}
       }
       .ctrl-btn{width: 24px;height: 24px;float: left;margin-top: 16px;cursor: pointer;}
-      .el-button--text{color: @main-color;}
     }
 
   }
