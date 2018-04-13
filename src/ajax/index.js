@@ -4,7 +4,11 @@ import store from '@/store'
 import router from '@/router'
 
 console.log(process.env)
-if (process.env.ENV === 'd') axios.defaults.baseURL = '/api'
+if (process.env.ENV === 'd') {
+  axios.defaults.baseURL = '/api'
+} else {
+  axios.defaults.baseURL = 'https://app.eyiqigou.com'
+}
 
 axios.interceptors.request.use(config => {
   if (store.state.token) config.headers['token'] = store.state.token
@@ -41,7 +45,6 @@ var $ajax = (opts) => {
 export default {
   name: 'ajax',
   install (Vue) {
-    Vue.ajax = $ajax
     Vue.prototype.$ajax = $ajax
   }
 }

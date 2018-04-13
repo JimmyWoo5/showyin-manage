@@ -111,7 +111,7 @@ export default {
         form.append('thumbFile', this.imgFile) // 图片
         this.audios[0].uploadFile && form.append('voiceFile1', this.audios[0].uploadFile) // 段1 有才传
         form.append('voiceFile2', this.audios[1].uploadFile) // 段2
-        this.audios[0].uploadFile && form.append('voiceFile3', this.audios[2].uploadFile) // 段3 有才传
+        this.audios[2].uploadFile && form.append('voiceFile3', this.audios[2].uploadFile) // 段3 有才传
         this.$ajax({
           url: '/server/voice/upload',
           method: 'post',
